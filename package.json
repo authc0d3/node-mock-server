@@ -1,0 +1,24 @@
+{
+  "name": "node-mock-server",
+  "version": "1.0.0",
+  "description": "A simple mock server for testing",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "keywords": [
+    "json",
+    "mock",
+    "server"
+  ],
+  "author": "authc0d3",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

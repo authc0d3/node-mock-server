@@ -1,0 +1,13 @@
+{
+  "endpoint": "/json",
+  "method": "GET",
+  "response": {
+    "status": 200,
+    "contentType": "application/json",
+    "body": {
+      "from": "Node Mock Server",
+      "message": "Hello world!"
+    }
+  },
+  "sleep": 500
+}

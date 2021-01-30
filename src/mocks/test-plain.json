@@ -1,0 +1,10 @@
+{
+  "endpoint": "/plain",
+  "method": "GET",
+  "response": {
+    "status": 200,
+    "contentType": "text/plain",
+    "body": "Hello world!"
+  },
+  "sleep": 500
+}
