@@ -4,12 +4,24 @@ const morgan = require("morgan");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const mockPath = path.join(__dirname, process.env.MOCKS_DIRECTORY);
 
 // Method to return data
 function resolveEndpoint(response, service) {
   response.set("Content-Type", service.response.contentType);
   response.status(service.response.status);
-  response.send(service.response.body);
+  if (service.response.file) {
+    try {
+      const raw = fs.readFileSync(`${mockPath}/${service.response.file}`);
+      response.send(raw);
+    } catch (err) {
+      console.log(
+        `Unable to read file content ${mockPath}/${service.response.file}: ${err}`
+      );
+    }
+  } else {
+    response.send(service.response.body);
+  }
 }
 
 // Server config
@@ -19,7 +31,6 @@ server.use(express.json());
 server.use(cors());
 
 // Load all endpoints from mocks directory
-const mockPath = path.join(__dirname, process.env.MOCKS_DIRECTORY);
 fs.readdir(mockPath, (err, files) => {
   if (err) {
     return console.log("Unable to load mocks directory: " + err);
@@ -37,8 +48,8 @@ fs.readdir(mockPath, (err, files) => {
             resolveEndpoint(res, service);
           }
         });
-      } catch {
-        return console.log(`Unable to initialize service ${file}`);
+      } catch (err) {
+        console.log(`Unable to initialize service ${file}: ${err}`);
       }
     }
   });

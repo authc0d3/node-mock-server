@@ -4,7 +4,7 @@
   "response": {
     "status": 200,
     "contentType": "text/xml",
-    "body": "<?xml version='1.0' encoding='UTF-8'?><note><from>Node Mock Server</from><to>Tove</to><message>Hello world!</message></note>"
+    "file": "/files/test-xml.xml"
   },
   "sleep": 500
 }
