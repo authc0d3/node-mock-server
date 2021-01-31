@@ -5,6 +5,7 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const mockPath = path.join(__dirname, process.env.MOCKS_DIRECTORY);
+const enableLogs = process.env.ENABLE_LOGS || false;
 
 // Method to return data
 function resolveEndpoint(response, service) {
@@ -12,7 +13,11 @@ function resolveEndpoint(response, service) {
   response.status(service.response.status);
   if (service.response.file) {
     try {
-      const raw = fs.readFileSync(`${mockPath}/${service.response.file}`);
+      const raw = fs.readFileSync(
+        `${mockPath}/${service.response.file}`,
+        "utf8"
+      );
+      if (enableLogs) console.log("Response", raw);
       response.send(raw);
     } catch (err) {
       console.log(
@@ -20,6 +25,7 @@ function resolveEndpoint(response, service) {
       );
     }
   } else {
+    if (enableLogs) console.log("Response", service.response.body);
     response.send(service.response.body);
   }
 }
@@ -42,6 +48,10 @@ fs.readdir(mockPath, (err, files) => {
         const raw = fs.readFileSync(`${mockPath}/${file}`);
         const service = JSON.parse(raw);
         server[service.method.toLowerCase()](service.endpoint, (req, res) => {
+          if (enableLogs) {
+            const { headers, body } = req;
+            console.log("Request", { headers, body });
+          }
           if (service.sleep) {
             setTimeout(() => resolveEndpoint(res, service), service.sleep);
           } else {
