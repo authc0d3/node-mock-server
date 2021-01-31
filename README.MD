@@ -25,9 +25,31 @@ npm start
 
 ## Create endpoints
 
-To create custom endpoints only need to add new json files to **/src/mocks** folder, in wich you will also find some endpoint file examples.
+An example of endpoint file could be like this:
 
-By having Nodemon, the server will be updated on any change in endpoint files, so it is not necessary to restart the server manually when creating or modifying endpoints.
+```
+{
+  "endpoint": "/json",
+  "method": "GET",
+  "response": {
+    "status": 200,
+    "contentType": "application/json",
+    "body": {
+      "from": "Node Mock Server",
+      "message": "Hello world!"
+    }
+  },
+  "sleep": 500
+}
+```
+
+Through this file, the server will mount an endpoint in **/json**, which will return a JSON object with the data contained in the body property.
+
+The **sleep** property indicates whether the server should wait a certain time to simulate a longer processing time. If this property is not indicated, the response will be immediate.
+
+By having Nodemon, **the server will be updated on any endpoint files change**, so it is not necessary to restart the server manually when creating or modifying endpoints.
+
+To create custom endpoints **you only need to add new json files to /src/mocks** folder, in wich you will also find other endpoint file examples.
 
 ## Customize configuration
 
