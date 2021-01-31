@@ -23,6 +23,12 @@ function resolveEndpoint(response, service) {
       console.log(
         `Unable to read file content ${mockPath}/${service.response.file}: ${err}`
       );
+      const res =
+        service.response.contentType.toLowerCase() === "application/json"
+          ? { error: "Unhandled error" }
+          : "Unhandled error";
+      if (enableLogs) console.log("Response", res);
+      response.send(res);
     }
   } else {
     if (enableLogs) console.log("Response", service.response.body);
