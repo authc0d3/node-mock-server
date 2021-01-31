@@ -43,7 +43,7 @@ An example of endpoint file could be like this:
 }
 ```
 
-Through this file, the server will mount an endpoint in **/json**, which will return a JSON object with the data contained in the body property.
+Through this file, the server will mount an endpoint in **http://localhost:4000/json**, which will return a JSON object with the data contained in the body property.
 
 The **sleep** property indicates whether the server should wait a certain time to simulate a longer processing time. If this property is not indicated, the response will be immediate.
 
