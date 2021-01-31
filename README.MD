@@ -53,7 +53,9 @@ To create custom endpoints **you only need to add new json files to /src/mocks**
 
 ## Customize configuration
 
-You can configure some server properties (like port and mocks path) using the **.env** file
+You can configure some server properties (like port and mocks path) using the **.env** file.
+
+If you need to simulate requests to external domains you can also configure them in your OS to connect with your localhost (127.0.0.1) and modify the constant **APP_PORT** in the .env file to set the port you need.
 
 ## License
 
