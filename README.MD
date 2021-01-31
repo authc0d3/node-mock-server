@@ -9,19 +9,25 @@ You only need [Node.js](https://nodejs.org/), recommended LTS version.
 ## Get started
 
 1. Clone this repo
+
+```
+> git clone https://github.com/authc0d3/node-mock-server.git
+```
+
 2. Install dependencies
 
 ```
-npm install
+> cd node-mock-server
+> npm install
 ```
 
 3. Start the server
 
 ```
-npm start
+> npm start
 ```
 
-4. Check if it works on: [http://localhost/4000/json](http://localhost/4000/json)
+4. Check if it works on: [http://localhost:4000/json](http://localhost:4000/json)
 
 ## Create endpoints
 
