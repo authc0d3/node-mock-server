@@ -63,6 +63,14 @@ You can configure some server properties using the **.env** file (change port, e
 
 If you need to simulate requests to external domains you can also configure them in your OS to connect with your localhost (127.0.0.1) and modify the constant **APP_PORT** in the .env file to set the port you need.
 
+The **ENABLE_LOGS** property allow three values:
+
+- requests: Show only request logs.
+- responses: Show only response logs.
+- all: Show request and response logs.
+
+Any other value disables the logs. By default it is set to all.
+
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)

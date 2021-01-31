@@ -5,35 +5,39 @@ const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
 const mockPath = path.join(__dirname, process.env.MOCKS_DIRECTORY);
-const enableLogs = process.env.ENABLE_LOGS || false;
+const logsMode = process.env.ENABLE_LOGS || "none";
 
 // Method to return data
 function resolveEndpoint(response, service) {
+  let res = null;
   response.set("Content-Type", service.response.contentType);
   response.status(service.response.status);
   if (service.response.file) {
     try {
-      const raw = fs.readFileSync(
-        `${mockPath}/${service.response.file}`,
-        "utf8"
-      );
-      if (enableLogs) console.log("Response", raw);
-      response.send(raw);
+      // External file
+      res = fs.readFileSync(`${mockPath}/${service.response.file}`, "utf8");
     } catch (err) {
+      // Error reading file
       console.log(
         `Unable to read file content ${mockPath}/${service.response.file}: ${err}`
       );
-      const res =
-        service.response.contentType.toLowerCase() === "application/json"
+      const contentType = service.response.contentType.toLowerCase();
+      res =
+        contentType === "application/json"
           ? { error: "Unhandled error" }
+          : contentType === "text/xml"
+          ? "<?xml version='1.0' encoding='UTF-8'?><error>Unhandled error</error>"
           : "Unhandled error";
-      if (enableLogs) console.log("Response", res);
-      response.send(res);
     }
   } else {
-    if (enableLogs) console.log("Response", service.response.body);
-    response.send(service.response.body);
+    // Mock body
+    res = service.response.body || "";
   }
+  // Return response
+  if (logsMode === "responses" || logsMode === "all") {
+    console.log("Response", res);
+  }
+  response.send(res);
 }
 
 // Server config
@@ -54,7 +58,7 @@ fs.readdir(mockPath, (err, files) => {
         const raw = fs.readFileSync(`${mockPath}/${file}`);
         const service = JSON.parse(raw);
         server[service.method.toLowerCase()](service.endpoint, (req, res) => {
-          if (enableLogs) {
+          if (logsMode === "requests" || logsMode === "all") {
             const { headers, body } = req;
             console.log("Request", { headers, body });
           }
