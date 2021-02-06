@@ -2,11 +2,11 @@
 
 A very simple mock server for testing, made with Express and Nodemon to allow real time endpoints aggregation.
 
-## Requirements
+## ✅ Requirements
 
 You only need [Node.js](https://nodejs.org/), recommended LTS version.
 
-## Get started
+## 🚀 Get started
 
 1. Clone this repo
 
@@ -29,7 +29,7 @@ You only need [Node.js](https://nodejs.org/), recommended LTS version.
 
 4. Check if it works on: [http://localhost:4000/json](http://localhost:4000/json)
 
-## Create endpoints
+## 👩‍💻 Create endpoints
 
 An example of endpoint file could be like this:
 
@@ -57,7 +57,7 @@ By having Nodemon, **the server will be updated on any endpoint files change**, 
 
 To create custom endpoints **you only need to add new json files to /src/mocks** folder, in wich you will also find other endpoint file examples.
 
-## Customize configuration
+## 🛠️ Customize configuration
 
 You can configure some server properties using the **.env** file (change port, enable or disable logs, change mocks path...).
 
@@ -71,6 +71,6 @@ The **ENABLE_LOGS** property allow three values:
 
 Any other value disables the logs. By default it is set to all.
 
-## License
+## :book: License
 
 [MIT](https://opensource.org/licenses/MIT)
