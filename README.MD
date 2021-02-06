@@ -1,6 +1,6 @@
 # Node Mock Server
 
-A very simple mock server for NodeJS, made with Express. It use Nodemon to allow real time endpoints aggregation.
+A very simple mock server for testing, made with Express and Nodemon to allow real time endpoints aggregation.
 
 ## Requirements
 
